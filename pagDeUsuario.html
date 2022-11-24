@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Não Logada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <input type="hidden" name="logado" id="logado" value="{LOGADO}">
+    <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-indigo-100 py-6 sm:py-12"
+        style="line-height: normal">
+        <div style="width: 100%; max-width: 600px"
+            class="border-t-4 border-t-indigo-500 relative bg-white px-6 pt-8 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-8">
+            <h1 class="font-bold" class="m-0">Bem-vindo, {user}</h1>
+        </div>
+        <div style="width: 100%; max-width: 600px"
+            class="relative bg-white px-6 pt-8 mt-4 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-8">
+            <h2 class="font-bold">Seus Posts</h2>
+            <div name="mensagens" class="pb-4 pt-2">
+                {LINHAS}
+                <div class="text-gray-400" style="font-size:14px">Nenhuma mensagem para mostrar</div>
+            </div>
+            <div class="mt-4">
+                <button onclick="abrir()" name="botaoCriar"
+                    class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Enviar uma Mensagem
+                </button>
+                <div name="popUp" class="hidden">
+                    <form action="/adicionaMensagem.php" method="post">
+                        <input type="hidden" name="Nome" value="{user}">
+                        <label for="about" class="block text-sm font-medium text-gray-700">Digite sua mensagem</label>
+                        <div class="mt-1">
+                            <textarea rows="3" name="Mensagem"
+                                class="mt-1 border-2 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                placeholder="Digite aqui sua mensagem que será enviada ao post"></textarea>
+                        </div>
+                        <div class="py-3 text-right">
+                            <button type="button" onclick="fechar()" style="cursor:pointer"
+                                class="inline-flex justify-center bg-gray-50 rounded-md border border-transparent py-2 px-4 text-sm font-medium text-gray shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Cancelar</button>
+
+                            <button type="submit"
+                                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>validaUsuarioLogado();</script>
+</body>
+
+</html>
