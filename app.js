@@ -17,6 +17,8 @@ function validaUsuarioLogado() {
         window.location.href = 'index.html';
     } 
 }
+
 function logar(){
     sessionStorage.setItem('valorStorage', true);
 }
+
