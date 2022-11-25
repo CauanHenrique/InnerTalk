@@ -1,7 +1,7 @@
 <?php
 
 $Mensagem = $_POST['Mensagem'];
-$Nome = $_POST['Nome'];
+$Nome     = $_POST['Nome'];
 
 $post = $Nome.';'.$Mensagem.PHP_EOL;
 
@@ -12,7 +12,7 @@ if(strpos(file_get_contents('cadastros.csv'),$Nome)!==False){
     $template = str_replace('{user}',$Nome, $template);
     
 }else{
-    $linha =    $Nome.';'.$Email.'; '.PHP_EOL;
+    $linha = $Nome.';'.$Email.'; '.PHP_EOL;
     file_put_contents('cadastros.csv',$linha,FILE_APPEND);
 
     $template = file_get_contents('novoUsuario.html');
@@ -22,19 +22,20 @@ if(strpos(file_get_contents('cadastros.csv'),$Nome)!==False){
 
 $posts = file('posts.csv');
 
-$linhas=    '';
+$linhas = '';
 
-for($i=count($posts);$i>=0;$i--){
+for($i=0;$i<=count($posts);$i++){
     $dadosSeparados = explode(';',$posts[$i]);
-    $Nome =           $dadosSeparados[0];
-    $Mensagem =          $dadosSeparados[1];
+    $Nome           = $dadosSeparados[0];
+    $Mensagem       = $dadosSeparados[1];
 
-    $templateLinha =  file_get_contents('feed.html');
-    $templateLinha =  str_replace('{Nome}',$Nome,$templateLinha);
-    $templateLinha =  str_replace('{Mensagem}',$Mensagem,$templateLinha);
-    $linhas .=        $templateLinha;
+    $templateLinha = file_get_contents('feed.html');
+    $templateLinha = str_replace('{ID}',$i,$templateLinha);
+    $templateLinha = str_replace('{Nome}',$Nome,$templateLinha);
+    $templateLinha = str_replace('{Mensagem}',$Mensagem,$templateLinha);
+    $linhas       .= $templateLinha;
 }
 
 
-$template= str_replace('{LINHAS}',$linhas,$template);
+$template = str_replace('{LINHAS}',$linhas,$template);
 echo $template;
